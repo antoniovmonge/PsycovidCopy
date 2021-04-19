@@ -80,7 +80,7 @@ def app():
         length = len(items)
         if length <= 3:
             sns.histplot(df[df['Country'].isin(items[0:3])],
-                        x="PSS10_avg", hue="Country")
+                         x="PSS10_avg", hue="Country")
             plt.xlabel('Perceived Stress', size=10)
             plt.ylabel('Number of people', size=10)
 
