@@ -70,6 +70,22 @@ def app():
     st.plotly_chart(country_stats())
 
 
+    # def stress():
+
+    #     fig = plt.figure()
+
+    #     items = []
+    #     for i in user_select:
+    #         items.append(i)
+    #     length = len(items)
+    #     if length <= 3:
+    #         sns.histplot(df[df['Country'].isin(items[0:3])],
+    #                      x="PSS10_avg", hue="Country")
+    #         plt.xlabel('Perceived Stress', size=10)
+    #         plt.ylabel('Number of people', size=10)
+
+    #     return fig
+
     def stress():
 
         fig = plt.figure()
@@ -79,10 +95,15 @@ def app():
             items.append(i)
         length = len(items)
         if length <= 3:
+            # for i in items:
+            #     plt.hist(df[df['Country'] == i]["PSS10_avg"], bins=10,
+            #              density=True, alpha=0.3, label=i)
+                
             sns.histplot(df[df['Country'].isin(items[0:3])],
                          x="PSS10_avg", hue="Country")
             plt.xlabel('Perceived Stress', size=10)
             plt.ylabel('Number of people', size=10)
+            plt.legend()
 
         return fig
 
