@@ -17,9 +17,12 @@ def app():
 
     st.sidebar.title('Visualisation Selector')
 
-    client = storage.Client()
-    path = f"gs://{BUCKET_NAME}/{BUCKET_TRAIN_DATA_PATH}"
-    df = pd.read_csv(path, error_bad_lines=False, encoding='latin-1')
+    # UNCOMENT THOSE LINES TO ACTIVTE GCP PATH
+    
+    # client = storage.Client()
+    # path = f"gs://{BUCKET_NAME}/{BUCKET_TRAIN_DATA_PATH}"
+    # df = pd.read_csv(path, error_bad_lines=False, encoding='latin-1')
+    df = pd.read_csv('raw_data/cleaned_data_040321.csv')
 
 
     #select = st.sidebar.selectbox('Select a State',df['state'])

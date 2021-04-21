@@ -125,7 +125,7 @@ def app():
 
     # KNN Model
 
-    knn=joblib.load('knn.joblib')
+    knn=joblib.load('models/knn.joblib')
     pred = knn.predict(values.iloc[:,[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]])
     prediction = pd.DataFrame(pred)
     prediction.columns = ['neu', 'ext', 'ope', 'agr', 'con']
@@ -184,7 +184,7 @@ def app():
         return X[['Dem_Expat']]
 
 
-    model_stress = joblib.load('model_stress.joblib')
+    model_stress = joblib.load('models/model_stress.joblib')
     values = pd.DataFrame([kwargs.values()], columns=['BFF_15_1','BFF_15_2','BFF_15_3','BFF_15_4','BFF_15_5','BFF_15_6','BFF_15_7','BFF_15_8','BFF_15_9','BFF_15_10','BFF_15_11',
             'BFF_15_12','BFF_15_13','BFF_15_14','BFF_15_15','Dem_age','Dem_gender','Dem_edu','Dem_edu_mom','Dem_employment','Dem_Expat','Dem_maritalstatus','Dem_riskgroup','Dem_isolation'])
     pred_stress = model_stress.predict(values)
@@ -227,7 +227,7 @@ def app():
 
     # LONELINESS LEVEL
 
-    model_loneliness = joblib.load('model_loneliness.joblib')
+    model_loneliness = joblib.load('models/model_loneliness.joblib')
     values = pd.DataFrame([kwargs.values()], columns=['BFF_15_1','BFF_15_2','BFF_15_3','BFF_15_4','BFF_15_5','BFF_15_6','BFF_15_7','BFF_15_8','BFF_15_9','BFF_15_10','BFF_15_11',
             'BFF_15_12','BFF_15_13','BFF_15_14','BFF_15_15','Dem_age','Dem_gender','Dem_edu','Dem_edu_mom','Dem_employment','Dem_Expat','Dem_maritalstatus','Dem_riskgroup','Dem_isolation'])
     pred_loneli = model_loneliness.predict(values)
