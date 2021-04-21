@@ -19,11 +19,16 @@ def app():
 
     # UNCOMENT THOSE LINES TO ACTIVTE GCP PATH
     
-    # client = storage.Client()
-    # path = f"gs://{BUCKET_NAME}/{BUCKET_TRAIN_DATA_PATH}"
-    # df = pd.read_csv(path, error_bad_lines=False, encoding='latin-1')
-    df = pd.read_csv(
-        'raw_data/cleaned_data_040321.csv').drop(columns='Unnamed: 0')
+    client = storage.Client()
+    path = f"gs://{BUCKET_NAME}/{BUCKET_TRAIN_DATA_PATH}"
+    
+    @st.cache
+    def get_cached_data():
+        return pd.read_csv(path).drop(columns='Unnamed: 0')
+    
+    df = get_cached_data() 
+    # df = pd.read_csv(
+    #     'raw_data/cleaned_data_040321.csv').drop(columns='Unnamed: 0')
 
 
     #select = st.sidebar.selectbox('Select a State',df['state'])
@@ -77,7 +82,6 @@ def app():
     st.plotly_chart(country_stats())
 
 
-
     def stress():
 
         fig = plt.figure()
@@ -105,6 +109,7 @@ def app():
                         x="SLON3_avg", common_norm=False, label=i)
             plt.xlabel('Loneliness', size=10)
             plt.ylabel('Number of people', size=10)
+            plt.legend()
 
         return fig
 
