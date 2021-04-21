@@ -28,7 +28,7 @@ def app():
 
     st.title("    PSYCOVID     ")
     st.header('Welcome to our Data Science Project! :notebook:')
-    st.image('brain.jpg', width=500)
+    st.image('images/brain.jpg', width=500)
     st.markdown('                  ')
     st.markdown('                  ')
 
@@ -39,5 +39,5 @@ def app():
     st.markdown('                  ')
 
     st.header("We want to use ML to predict human behaviour :fire:")
-    st.image('pexels.jpg', width=500)
+    st.image('images/pexels.jpg', width=500)
 

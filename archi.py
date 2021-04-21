@@ -9,5 +9,5 @@ def app():
 
         #
         ''')
-    st.image('architecture_3.png', width=1000, use_column_width=True)
+    st.image('images/architecture_3.png', width=1000, use_column_width=True)
 
