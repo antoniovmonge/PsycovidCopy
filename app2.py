@@ -1,22 +1,25 @@
+import streamlit as st
+
+import numpy as np
+import pandas as pd
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+import plotly.express as px
+from google.cloud import storage
+from psycovid.params import *
+
 
 def app():
-    import streamlit as st
-
-    import numpy as np
-    import pandas as pd
-
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-
-    from plotly.subplots import make_subplots
-    import plotly.graph_objects as go
-    import plotly.express as px
-
 
     st.sidebar.title('Visualisation Selector')
 
-    df = pd.read_csv('cleaned_data_040321.csv',
-                    error_bad_lines=False, encoding='latin-1')
+    client = storage.Client()
+    path = f"gs://{BUCKET_NAME}/{BUCKET_TRAIN_DATA_PATH}"
+    df = pd.read_csv(path, error_bad_lines=False, encoding='latin-1')
 
 
     #select = st.sidebar.selectbox('Select a State',df['state'])
