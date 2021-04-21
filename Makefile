@@ -41,12 +41,12 @@ clean:
 # GCP Project Settings
 
 # project id
-PROJECT_ID=psycovid-beta  # Replace with your Project's ID
+PROJECT_ID=psycovid-beta
 
 # bucket name
-BUCKET_NAME=psycovid-beta-bucket # Use your Project's name as it should be unique
+BUCKET_NAME=psycovid-beta-bucket
 
-REGION=europe-west1 # Choose your region https://cloud.google.com/storage/docs/locations#available_locations
+REGION=europe-west1
 
 set_project:
 	@gcloud config set project ${PROJECT_ID}
@@ -55,7 +55,7 @@ create_bucket:
 	@gsutil mb -l ${REGION} -p ${PROJECT_ID} gs://${BUCKET_NAME}
 
 # path of the file to upload to gcp (the path of the file should be absolute or should match the directory where the make command is run)
-LOCAL_PATH="/home/antoniovmonge/code/antoniovmonge/psycovid-beta/raw_data/cleaned_data-040321.csv" # Replace with your local path to the `train_1k.csv` and make sure to put it between quotes
+LOCAL_PATH="/home/antoniovmonge/code/antoniovmonge/psycovid-beta/raw_data/cleaned_data_040321.csv"
 
 # bucket directory in which to store the uploaded file (we choose to name this data as a convention)
 BUCKET_FOLDER=data
