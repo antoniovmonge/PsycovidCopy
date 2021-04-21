@@ -22,7 +22,8 @@ def app():
     # client = storage.Client()
     # path = f"gs://{BUCKET_NAME}/{BUCKET_TRAIN_DATA_PATH}"
     # df = pd.read_csv(path, error_bad_lines=False, encoding='latin-1')
-    df = pd.read_csv('raw_data/cleaned_data_040321.csv')
+    df = pd.read_csv(
+        'raw_data/cleaned_data_040321.csv').drop(columns='Unnamed: 0')
 
 
     #select = st.sidebar.selectbox('Select a State',df['state'])
@@ -76,40 +77,18 @@ def app():
     st.plotly_chart(country_stats())
 
 
-    # def stress():
-
-    #     fig = plt.figure()
-
-    #     items = []
-    #     for i in user_select:
-    #         items.append(i)
-    #     length = len(items)
-    #     if length <= 3:
-    #         sns.histplot(df[df['Country'].isin(items[0:3])],
-    #                      x="PSS10_avg", hue="Country")
-    #         plt.xlabel('Perceived Stress', size=10)
-    #         plt.ylabel('Number of people', size=10)
-
-    #     return fig
 
     def stress():
 
         fig = plt.figure()
 
-        items = []
-        for i in user_select:
-            items.append(i)
-        length = len(items)
-        if length <= 3:
-            # for i in items:
-            #     plt.hist(df[df['Country'] == i]["PSS10_avg"], bins=10,
-            #              density=True, alpha=0.3, label=i)
-                
-            sns.histplot(df[df['Country'].isin(items[0:3])],
-                         x="PSS10_avg", hue="Country")
-            plt.xlabel('Perceived Stress', size=10)
-            plt.ylabel('Number of people', size=10)
-            plt.legend()
+        for i in items:
+            sns.kdeplot(data=df[df['Country'] == i],
+                        x="PSS10_avg", common_norm=False, label=i)
+        plt.title('Stress')
+        plt.xlabel('Perceived Stress', size=10)
+        plt.ylabel('Number of people', size=10)
+        plt.legend()
 
         return fig
 
@@ -118,23 +97,28 @@ def app():
 
         fig = plt.figure()
 
-        items = []
+        
         for i in user_select:
             items.append(i)
-        length = len(items)
-        if length <= 3:
-            sns.histplot(df[df['Country'].isin(items[0:3])],
-                        x="SLON3_avg", hue="Country")
+        
+            sns.kdeplot(data=df[df['Country'] == i],
+                        x="SLON3_avg", common_norm=False, label=i)
             plt.xlabel('Loneliness', size=10)
             plt.ylabel('Number of people', size=10)
 
         return fig
 
 
-    stress_radio = st.sidebar.radio(
-        '...and the topic', ('Perceived Stress', 'Loneliness'))
-    if stress_radio == 'Perceived Stress':
+    items = []
+    for i in user_select:
+        items.append(i)
+    if st.sidebar.button('Enter'):
+        # print is visible in server output, not in the page
+        print('button clicked!')
         st.write(stress())
-
-    elif stress_radio == 'Loneliness':
         st.write(loneliness())
+        items = []
+    else:
+        st.sidebar.write('Press to apply')
+    
+    
