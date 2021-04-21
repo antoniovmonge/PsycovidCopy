@@ -9,7 +9,7 @@ import seaborn as sns
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import plotly.express as px
-# from google.cloud import storage
+from google.cloud import storage
 from psycovid.params import *
 
 def app():
@@ -18,7 +18,7 @@ def app():
 
     # Comment/UNCOMMENT THOSE LINES TO ACTIVTE GCP PATH
     
-    # client = storage.Client()
+    client = storage.Client()
     path = f"gs://{BUCKET_NAME}/{BUCKET_TRAIN_DATA_PATH}"
     
     @st.cache
