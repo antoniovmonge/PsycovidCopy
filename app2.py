@@ -9,16 +9,16 @@ import seaborn as sns
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import plotly.express as px
-from google.cloud import storage
+# from google.cloud import storage
 from psycovid.params import *
 
 def app():
 
     st.sidebar.title('Visualisation Selector')
 
-    # UNCOMENT THOSE LINES TO ACTIVTE GCP PATH
+    # Comment/UNCOMMENT THOSE LINES TO ACTIVTE GCP PATH
     
-    client = storage.Client()
+    # client = storage.Client()
     path = f"gs://{BUCKET_NAME}/{BUCKET_TRAIN_DATA_PATH}"
     
     @st.cache
@@ -78,9 +78,6 @@ def app():
         return fig
 
 
-    st.plotly_chart(country_stats())
-
-
     def stress():
 
         fig = plt.figure()
@@ -88,9 +85,9 @@ def app():
         for i in items:
             sns.kdeplot(data=df[df['Country'] == i],
                         x="PSS10_avg", common_norm=False, label=i)
-        plt.title('Stress')
-        plt.xlabel('Perceived Stress', size=10)
-        plt.ylabel('Number of people', size=10)
+        plt.title('STRESS', fontsize=20)
+        plt.xlabel('Perceived Stress', size=15)
+        plt.ylabel('Number of people', size=15)
         plt.legend()
 
         return fig
@@ -106,23 +103,30 @@ def app():
         
             sns.kdeplot(data=df[df['Country'] == i],
                         x="SLON3_avg", common_norm=False, label=i)
-            plt.xlabel('Loneliness', size=10)
-            plt.ylabel('Number of people', size=10)
+            plt.title('LONLINESS', fontsize=20)
+            plt.xlabel('Percived Loneliness', size=15)
+            plt.ylabel('Percentage of people', size=15)
             plt.legend()
 
         return fig
 
+    # Create Columns
+    # col1, col2 = st.beta_columns(2)
 
     items = []
     for i in user_select:
         items.append(i)
-    if st.sidebar.button('Enter'):
+    if st.sidebar.button('Apply'):
         # print is visible in server output, not in the page
         print('button clicked!')
-        st.write(stress())
-        st.write(loneliness())
+        st.plotly_chart(country_stats(), use_container_width=False)
+        col1, col2 = st.beta_columns(2)
+        col1.write(stress(), use_column_width=True)
+        col2.write(loneliness(), use_column_width=True)
         items = []
     else:
         st.sidebar.write('Press to apply')
+        st.title('Please, select countries to compare')
+        st.header('...and press Apply')
     
     

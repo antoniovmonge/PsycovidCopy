@@ -7,10 +7,14 @@ PAGES = {
     "Introduction": intro,
     "Predictions": app1,
     "Data Analysis": app2,
-    " Project Architecture": archi
+    "Project Architecture": archi
 
 }
-
+st.set_page_config(
+    page_title="Psycovid-beta",  # => Quick reference - Streamlit
+    # page_icon="",
+    layout="centered",  # wide
+    initial_sidebar_state="auto")  # collapsed
 
 def edu_func(X):
 
