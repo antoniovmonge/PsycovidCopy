@@ -17,7 +17,7 @@ def app():
     st.sidebar.title('Visualisation Selector')
 
     # Comment/UNCOMMENT THOSE LINES TO ACTIVTE GCP PATH
-    client = storage.Client()
+    # client = storage.Client()
     path = f"gs://{BUCKET_NAME}/{BUCKET_TRAIN_DATA_PATH}"
     
     @st.cache
