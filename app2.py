@@ -11,13 +11,11 @@ import plotly.graph_objects as go
 import plotly.express as px
 from google.cloud import storage
 from psycovid.params import *
-import os
+
 
 def app():
 
     st.sidebar.title('Visualisation Selector')
-
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/antoniovmonge/code/antoniovmonge/gcp_keys/psycovid-beta-6cfec8fe1775.json"
 
     # Comment/UNCOMMENT THOSE LINES TO ACTIVTE GCP PATH
     client = storage.Client()
