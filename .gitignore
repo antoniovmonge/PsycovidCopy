@@ -23,7 +23,7 @@ __pycache__
 *.gz
 *PKG-INFO
 *.egg-info
-*.csv
+# *.csv
 *.zip
 *.txt
 mlruns
