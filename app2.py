@@ -12,7 +12,6 @@ import plotly.express as px
 from google.cloud import storage
 from psycovid.params import *
 import os
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=
 
 def app():
 
