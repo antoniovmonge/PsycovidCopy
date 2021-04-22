@@ -12,7 +12,6 @@ import plotly.express as px
 from google.cloud import storage
 from psycovid.params import *
 
-
 def app():
 
     st.sidebar.title('Visualisation Selector')
