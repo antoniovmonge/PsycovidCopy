@@ -18,16 +18,14 @@ def app():
 
     # Comment/UNCOMMENT THOSE LINES TO ACTIVTE GCP PATH
     client = storage.Client()
-    bucket = storage.Bucket(BUCKET_NAME)
-    bucket.location = REGION
     
-    path = f"gs://{bucket}/{BUCKET_TRAIN_DATA_PATH}"
+    path = f"gs://{BUCKET_NAME}/{BUCKET_TRAIN_DATA_PATH}"
 
     @st.cache
     def get_cached_data():
-        df = pd.read_csv(path).drop(columns='Unnamed: 0')
-        return df
+        return pd.read_csv(path).drop(columns='Unnamed: 0')
     
+    df = get_cached_data()
     # df = pd.read_csv(
     #     'raw_data/cleaned_data_040321.csv').drop(columns='Unnamed: 0')
 
