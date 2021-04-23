@@ -132,7 +132,7 @@ def app():
 
 
     # Create Columns
-    col1, col2 = st.beta_columns(2)
+    col1, col2, col3, col4 = st.beta_columns(4)
 
     # col1.header('Left')
     radar = make_radar_chart()
