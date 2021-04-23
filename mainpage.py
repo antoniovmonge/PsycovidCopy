@@ -13,7 +13,7 @@ PAGES = {
 st.set_page_config(
     page_title="Psycovid-beta",  # => Quick reference - Streamlit
     # page_icon="",
-    layout="centered",  # wide
+    layout="wide",  # wide, centered
     initial_sidebar_state="auto")  # collapsed
 
 def edu_func(X):

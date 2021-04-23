@@ -83,7 +83,6 @@ def app():
 
         return fig
 
-
     def stress():
 
         fig = plt.figure()
