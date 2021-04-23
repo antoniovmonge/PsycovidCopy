@@ -16,9 +16,9 @@ def app():
     from math import pi
 
 
-    st.markdown('<style>.css-2y0inq{top: -30px;}</style>', unsafe_allow_html=True)
-    st.markdown('<style>.css-1aumxhk{width: 30rem; background-image: linear-gradient(rgb(240, 240, 240), rgb(240, 240, 240));}</style>', unsafe_allow_html=True)
-    st.markdown('<style>.css-hi6a2p {padding: 1rem;}</style>', unsafe_allow_html=True)
+    # st.markdown('<style>.css-2y0inq{top: -30px;}</style>', unsafe_allow_html=True)
+    # st.markdown('<style>.css-1aumxhk{width: 30rem; background-image: linear-gradient(rgb(240, 240, 240), rgb(240, 240, 240));}</style>', unsafe_allow_html=True)
+    # st.markdown('<style>.css-hi6a2p {padding: 1rem;}</style>', unsafe_allow_html=True)
     # st.markdown('<style>.st-bf{padding:60px}</style>', unsafe_allow_html=True)
     # st.markdown('<style>.css-145kmo2 {font:20px;}</style>', unsafe_allow_html=True)
     # st.markdown('<style>.css-1aumxhk{font: 4.25rem;font-weight: 600;}</style>', unsafe_allow_html=True)
@@ -28,13 +28,19 @@ def app():
     # st.markdown('''
     #             # YOUR BIG 5 PERSONALITY SCORES
     #             ''')
-
-    st.sidebar.title('I see myself as a person who...')
+    st.markdown('''
+                ### I see myself as a person who...
+                #### ['Strongly disagree','Disagree','Slightly disagree','Slightly agree','Agree','Strongly agree']
+                ###
+                ''')
+    
+    col1, col2, col3, col4, col5 = st.beta_columns(5)
+    
 
     kwargs = {}
 
-    bff15_options = ['Strongly disagree','Disagree','Slightly disagree','Slightly agree','Agree','Strongly agree']
-
+    # bff15_options = ['Strongly disagree','Disagree','Slightly disagree','Slightly agree','Agree','Strongly agree']
+    bff15_options = ['1','2','3','4','5','6']
     bff15_labels = ['... is often concerned',
                     '... easily gets nervous',
                     '... is good at staying cool in stressful situations',
@@ -51,14 +57,26 @@ def app():
                     '... is lazy',
                     '... is effective when I do something']
 
-    for x in range(1,16):
-        st.sidebar.subheader(bff15_labels[x-1])
-        kwargs['BFF_15_'+str(x)]  = st.sidebar.select_slider('', [1,2,3,4,5,6],
-                                                            value=4,
+    for x in range(0,5):
+        col1.markdown(bff15_labels[x])
+        kwargs['BFF_15_'+str(x)]  = col1.radio('', [1,2,3,4,5,6],
+                                                            index=4,
                                                             format_func=lambda o: bff15_options[o-1],
                                                             key='BFF_15_'+str(x))
+    for x in range(5, 10):
+        col2.markdown(bff15_labels[x])
+        kwargs['BFF_15_'+str(x)] = col2.radio('', [1, 2, 3, 4, 5, 6],
+                                                      index=4,
+                                                      format_func=lambda o: bff15_options[o-1],
+                                                      key='BFF_15_'+str(x))
+    for x in range(10, 15):
+        col3.markdown(bff15_labels[x])
+        kwargs['BFF_15_'+str(x)] = col3.radio('', [1, 2, 3, 4, 5, 6],
+                                                        index=4,
+                                                        format_func=lambda o: bff15_options[o-1],
+                                                        key='BFF_15_'+str(x))
 
-    st.sidebar.subheader("Choose age:")
+    st.sidebar.markdown("#### Choose age:")
     kwargs['Dem_age'] = st.sidebar.slider("", 18, 70, value=42)
     st.sidebar.subheader("Pick a gender")
     kwargs['Dem_gender'] = st.sidebar.selectbox('',  options=['Male','Other/would rather not say','Female'])
@@ -131,16 +149,9 @@ def app():
     prediction.columns = ['neu', 'ext', 'ope', 'agr', 'con']
 
 
-    # Create Columns
-    col1, col2, col3, col4 = st.beta_columns(4)
 
-    # col1.header('Left')
     radar = make_radar_chart()
-    col1.write(radar, use_column_width=True)
-    # col1.write(prediction, use_column_width=True)
 
-
-    # col2.write(str(prediction['ext'][0].round(2)))
     legend = f"""
 
 
@@ -154,13 +165,7 @@ def app():
 
                 Conscientiousness {str(prediction['con'][0].round(2))}
                 """
-    col2.write("""
-            #
-
-            #
-            """)
-    col2.write(legend, use_column_width=True)
-
+    
 
     # STRESS LEVEL
     # Here I add the functions for predicting stress...
@@ -189,13 +194,7 @@ def app():
             'BFF_15_12','BFF_15_13','BFF_15_14','BFF_15_15','Dem_age','Dem_gender','Dem_edu','Dem_edu_mom','Dem_employment','Dem_Expat','Dem_maritalstatus','Dem_riskgroup','Dem_isolation'])
     pred_stress = model_stress.predict(values)
 
-    # st.markdown("""
-    #             ## IN A PANDEMIC OUTBREAK...
 
-    #             ### The prediction about your Stress and Loneliness levels:
-    #             """)
-    st.header('IN A PANDEMIC OUTBREAK...')
-    st.subheader('the prediction about your Stress and Loneliness levels is:')
 
     # Bar for Stress
 
@@ -258,9 +257,29 @@ def app():
 
     loneliness = make_speed_loneliness()
 
+    # Create Columns
+    # col1, col2, col3, col4 = st.beta_columns(4)
+
+    # col1.header('Left')
+    col4.write(radar, use_column_width=True)
+    # col1.write(prediction, use_column_width=True)
 
 
-    col3, col4 = st.beta_columns(2)
+    # col2.write(str(prediction['ext'][0].round(2)))
+    col5.write("""
+               ####
+            """)
+    col5.write(legend, use_column_width=True)
+
+    # st.markdown("""
+    #             ## IN A PANDEMIC OUTBREAK...
+
+    #             ### The prediction about your Stress and Loneliness levels:
+    #             """)
+    st.header('IN A PANDEMIC OUTBREAK...')
+    st.subheader('the prediction about your Stress and Loneliness levels is:')
+
+    col1, col2, col3, col4 = st.beta_columns(4)
 
     col3.write(stress, use_column_width=True)
     col4.write(loneliness, use_column_width=True)
