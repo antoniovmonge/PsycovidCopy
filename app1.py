@@ -31,7 +31,10 @@ def app():
     #             # YOUR BIG 5 PERSONALITY SCORES
     #             ''')
     col2.header('IN A PANDEMIC OUTBREAK...')
-    col2.subheader('the prediction about your Stress and Loneliness levels is:')
+    col2.markdown('''
+                  ### the prediction about your Stress and Loneliness levels is:
+                  ###
+                  ''')
 
     st.sidebar.title('I see myself as a person who...')
 
@@ -112,6 +115,7 @@ def app():
 
         # Initialise the spider plot
         fig = plt.figure(figsize=(3, 3), dpi=100)
+        
         ax = plt.subplot(111, polar=True)
 
         # Draw one axe per variable + add labels
@@ -152,15 +156,15 @@ def app():
 
     # col2.write(str(prediction['ext'][0].round(2)))
     legend = f"""
-                ### Extraversion {str(prediction['ext'][0].round(2))}
+                Extraversion {str(prediction['ext'][0].round(2))}
 
-                ### Neuroticism {str(prediction['neu'][0].round(2))}
+                Neuroticism {str(prediction['neu'][0].round(2))}
 
-                ### Openness to experience {str(prediction['ope'][0].round(2))}
+                Openness to experience {str(prediction['ope'][0].round(2))}
 
-                ### Agreeableness {str(prediction['agr'][0].round(2))}
+                Agreeableness {str(prediction['agr'][0].round(2))}
 
-                ### Conscientiousness {str(prediction['con'][0].round(2))}
+                Conscientiousness {str(prediction['con'][0].round(2))}
                 """
     col2.write("""
             
@@ -214,8 +218,8 @@ def app():
         ))
         fig.update_layout(
             autosize=True,
-            width=300,
-            height=300,
+            width=200,
+            height=200,
             margin=dict(
                 l=0,
                 r=0,
@@ -249,8 +253,8 @@ def app():
         ))
         fig.update_layout(
             autosize=True,
-            width=300,
-            height=300,
+            width=200,
+            height=200,
             margin=dict(
                 l=0,
                 r=0,
