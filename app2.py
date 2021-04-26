@@ -9,10 +9,15 @@ import seaborn as sns
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import plotly.express as px
+<<<<<<< HEAD
 from google.cloud import storage
 from psycovid.params import *
 import os
 from google.oauth2 import service_account
+=======
+# from google.cloud import storage
+# from psycovid.params import *
+>>>>>>> 4e1bcb8342d0e3d64ffa151fd478682c140dede8
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/antoniovmonge/code/antoniovmonge/gcp_keys/psycovid-beta-6cfec8fe1775.json"
 credentials = service_account.Credentials.from_service_account_file(
@@ -22,12 +27,27 @@ def app():
     st.sidebar.title('Visualisation Selector')
 
     # Comment/UNCOMMENT THOSE LINES TO ACTIVTE GCP PATH
+<<<<<<< HEAD
     client = language.LanguageServiceClient(credentials=credentials)
     
     path = f"gs://{BUCKET_NAME}/{BUCKET_TRAIN_DATA_PATH}"
 
     @st.cache
     def get_cached_data():
+=======
+    # client = storage.Client()
+    
+    # CLOUD PATH
+    # path = f"gs://{BUCKET_NAME}/{BUCKET_TRAIN_DATA_PATH}"
+    
+    # LOCLA PATH
+    path = 'raw_data/cleaned_data_040321.csv'
+    
+    
+    @st.cache
+    def get_cached_data():
+        
+>>>>>>> 4e1bcb8342d0e3d64ffa151fd478682c140dede8
         return pd.read_csv(path).drop(columns='Unnamed: 0')
     
     df = get_cached_data()
@@ -82,7 +102,45 @@ def app():
 
         return fig
 
+    # PLOTLY RADAR CHART
+    def country_radar():
+        Country_neu = select_country.groupby('Country')['neu'].mean()
+        Country_ext = select_country.groupby('Country')['ext'].mean()
+        Country_ope = select_country.groupby('Country')['ope'].mean()
+        Country_con = select_country.groupby('Country')['con'].mean()
+        Country_agr = select_country.groupby('Country')['agr'].mean()
+        
+        categories = ['Neuroticism', 'Openness', 'Extraversion',
+                      'Agreeableness', 'Conscientiousness']
+        
+        fig = go.Figure()
 
+        fig.add_trace(go.Scatterpolar(
+            r=[Country_neu, 5, 2, 2, 3],
+            theta=categories,
+            fill='toself',
+            name='Product A'
+        ))
+        # fig.add_trace(go.Scatterpolar(
+        #     r=[4, 3, 2.5, 1, 2],
+        #     theta=categories,
+        #     fill='toself',
+        #     name='Product B'
+        # ))
+
+        fig.update_layout(
+            polar=dict(
+                radialaxis=dict(
+                    visible=True,
+                    range=[0, 5]
+                )),
+            showlegend=False
+        )
+
+        # fig.show()
+        
+        return fig
+    
     def stress():
 
         fig = plt.figure()
@@ -118,12 +176,14 @@ def app():
     # Create Columns
     # col1, col2 = st.beta_columns(2)
 
+
     items = []
     for i in user_select:
         items.append(i)
     if st.sidebar.button('Apply'):
         # print is visible in server output, not in the page
         print('button clicked!')
+        st.write(country_radar())
         st.plotly_chart(country_stats(), use_container_width=False)
         col1, col2 = st.beta_columns(2)
         col1.write(stress(), use_column_width=True)

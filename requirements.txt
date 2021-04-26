@@ -28,12 +28,9 @@ joblib
 memoized-property
 termcolor
 
-uvicorn
-fastapi
-
-# psycovid
 streamlit
 matplotlib
 seaborn
 plotly
+joblib
 mord
