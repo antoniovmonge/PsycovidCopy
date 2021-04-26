@@ -6,7 +6,6 @@ import seaborn as sns
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import plotly.express as px
-import matplotlib.ticker as mtick
 
 # from google.cloud import storage
 # from psycovid.params import *
@@ -77,13 +76,14 @@ def app():
         plt.title('STRESS')
         plt.xlabel('Perceived Stress')
         plt.ylabel('Distribution')
+        plt.yticks([0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9],
+                   ['10 %', '20 %', '30 %', '40 %', '50 %', '60 %', '70 %', '80 %', '90 %'])
         plt.legend()
 
         return fig
 
 
     def loneliness():
-
         fig = plt.figure()
 
         
@@ -95,6 +95,8 @@ def app():
             plt.title('LONLINESS')
             plt.xlabel('Percived Loneliness')
             plt.ylabel('Distribution')
+            plt.yticks([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7],
+                       ['10 %', '20 %', '30 %', '40 %', '50 %', '60 %', '70 %'])
             plt.legend()
 
         return fig
