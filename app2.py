@@ -73,7 +73,7 @@ def app():
 
         for i in items:
             sns.kdeplot(data=df[df['Country'] == i],
-                        x="PSS10_avg", common_norm=False, label=i)
+                        x="PSS10_avg", bw_adjust=1, common_norm=False, label=i)
         plt.title('STRESS')
         plt.xlabel('Perceived Stress')
         plt.ylabel('Distribution')
@@ -91,7 +91,7 @@ def app():
             items.append(i)
             # sns.set_style("talk")
             sns.kdeplot(data=df[df['Country'] == i],
-                        x="SLON3_avg", common_norm=False, label=i)
+                        x="SLON3_avg", bw_adjust=1.5, common_norm=False, label=i)
             plt.title('LONLINESS')
             plt.xlabel('Percived Loneliness')
             plt.ylabel('Distribution')
