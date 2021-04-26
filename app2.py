@@ -1,34 +1,31 @@
 import streamlit as st
-
 import numpy as np
 import pandas as pd
-
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import plotly.express as px
 # from google.cloud import storage
 # from psycovid.params import *
+# import os
+# from google.oauth2 import service_account
 
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/antoniovmonge/code/antoniovmonge/gcp_keys/psycovid-beta-6cfec8fe1775.json"
+# credentials = service_account.Credentials.from_service_account_file(
+#     "/home/antoniovmonge/code/antoniovmonge/gcp_keys/psycovid-beta-6cfec8fe1775.json")
 def app():
 
     st.sidebar.title('Visualisation Selector')
 
     # Comment/UNCOMMENT THOSE LINES TO ACTIVTE GCP PATH
-    # client = storage.Client()
+    # client = language.LanguageServiceClient(credentials=credentials)
     
-    # CLOUD PATH
     # path = f"gs://{BUCKET_NAME}/{BUCKET_TRAIN_DATA_PATH}"
-    
-    # LOCLA PATH
     path = 'raw_data/cleaned_data_040321.csv'
-    
-    
+
     @st.cache
     def get_cached_data():
-        
         return pd.read_csv(path).drop(columns='Unnamed: 0')
     
     df = get_cached_data()
