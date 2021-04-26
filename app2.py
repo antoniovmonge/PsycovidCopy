@@ -10,7 +10,7 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import plotly.express as px
 # from google.cloud import storage
-from psycovid.params import *
+# from psycovid.params import *
 
 def app():
 
@@ -83,6 +83,45 @@ def app():
 
         return fig
 
+    # PLOTLY RADAR CHART
+    def country_radar():
+        Country_neu = select_country.groupby('Country')['neu'].mean()
+        Country_ext = select_country.groupby('Country')['ext'].mean()
+        Country_ope = select_country.groupby('Country')['ope'].mean()
+        Country_con = select_country.groupby('Country')['con'].mean()
+        Country_agr = select_country.groupby('Country')['agr'].mean()
+        
+        categories = ['Neuroticism', 'Openness', 'Extraversion',
+                      'Agreeableness', 'Conscientiousness']
+        
+        fig = go.Figure()
+
+        fig.add_trace(go.Scatterpolar(
+            r=[Country_neu, 5, 2, 2, 3],
+            theta=categories,
+            fill='toself',
+            name='Product A'
+        ))
+        # fig.add_trace(go.Scatterpolar(
+        #     r=[4, 3, 2.5, 1, 2],
+        #     theta=categories,
+        #     fill='toself',
+        #     name='Product B'
+        # ))
+
+        fig.update_layout(
+            polar=dict(
+                radialaxis=dict(
+                    visible=True,
+                    range=[0, 5]
+                )),
+            showlegend=False
+        )
+
+        # fig.show()
+        
+        return fig
+    
     def stress():
 
         fig = plt.figure()
@@ -118,12 +157,14 @@ def app():
     # Create Columns
     # col1, col2 = st.beta_columns(2)
 
+
     items = []
     for i in user_select:
         items.append(i)
     if st.sidebar.button('Apply'):
         # print is visible in server output, not in the page
         print('button clicked!')
+        st.write(country_radar())
         st.plotly_chart(country_stats(), use_container_width=False)
         col1, col2 = st.beta_columns(2)
         col1.write(stress(), use_column_width=True)

@@ -1,22 +1,18 @@
+import streamlit as st
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
 
 def app():
-
-
-
-    import streamlit as st
-
-    import numpy as np
-    import pandas as pd
-
-    import matplotlib.pyplot as plt
-    import numpy as np
-    import seaborn as sns
-
-    from plotly.subplots import make_subplots
-    import plotly.graph_objects as go
-
+    ###################
+    # SIDEBAR CONTENT #
+    ###################
+    
     st.sidebar.title('Who are we?')
-
     st.sidebar.markdown(
         "[Shruthi Lakshmanan Parthasarathy](https://www.linkedin.com/in/shruthilp/)")
     st.sidebar.markdown(
@@ -25,11 +21,14 @@ def app():
         "[Wojciech Gutkiewicz](https://www.linkedin.com/in/gutkiewicz/)")
     st.sidebar.markdown(
         "[Veronica Delgado Benito](https://www.linkedin.com/in/veronica-delgadobenito/)")
-
-    st.sidebar.text('Soon to be Data Scientists')
+    # st.sidebar.text('Soon to be Data Scientists')
     st.sidebar.text("Le Wagon's Data Science Bootcamp")
     st.sidebar.text("Berlin Batch 532")
 
+    ###############
+    # MAIN HEADER #
+    ###############
+    
     st.markdown('''
                 # PSYCOVID - Data Science Project
                 ### Study based on on psychological impact and behavioural consequences of the COVID-19 outbreak
@@ -37,8 +36,9 @@ def app():
                 ''')
     col1, col2, col3 = st.beta_columns(3)
     
-    # LEFT COLUMN
-    
+    ############
+    # COLUMN 1 #
+    ############
     col1.markdown('''
                   ### Data Analysis
                   Interactive Data Analysis of Personality and emotional repercusion of COVID-19 by countries
@@ -56,20 +56,22 @@ def app():
                   ''')
     col1.image(['images/white-space-small.png', 'images/map-1.png'], width=150)
     
-    # COLUMN 2
+    ############
+    # COLUMN 2 #
+    ############
     col2.markdown('''
                   > ### Predictions
                   Interactive **Machine Learning** that quantifies you personality based on the big 5 personality traits using the bff_personality test
                   ''')
     col2.image(['images/white-space-small.png',
                 'images/radar-chart.png'], use_column_width=False, width=140)
-    col2.markdown(
-        '> and predict stress and loneliness levels based on your personaliy and some demographical factors')
+    col2.markdown('> and predict stress and loneliness levels based on your personaliy and some demographical factors')
     col2.image('images/speedometers-good.png',
                use_column_width=True, width=400)
     
-
-    # COLUMN 3 
+    ############
+    # COLUMN 3 #
+    ############
     col3.markdown('''
                   > ### Data Source
                   Data Collection Technology: **Survey** [COVIDiSTRESS Global Survey](https://osf.io/z39us/)
@@ -90,5 +92,3 @@ def app():
                   - loneliness measurement
                   - Emotional Distress
                   ''')
-    
-    

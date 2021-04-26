@@ -1,20 +1,18 @@
+import streamlit as st
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import joblib
+import plotly.graph_objects as go
+import plotly.express as px
+from math import pi
+
 def app():
-
-    import streamlit as st
-
-    import numpy as np
-    import pandas as pd
-
-    import matplotlib.pyplot as plt
-    import numpy as np
-
-    import joblib
-
-    import plotly.graph_objects as go
-    import plotly.express as px
-
-    from math import pi
-
+    ############
+    # CSS CODE #
+    ############
+    
     st.markdown(
         '<style>.css-2y0inq{top: -30px;}</style>', unsafe_allow_html=True)
     st.markdown(
@@ -25,7 +23,13 @@ def app():
     # st.markdown('<style>.css-145kmo2 {font:20px;}</style>', unsafe_allow_html=True)
     # st.markdown('<style>.css-1aumxhk{font: 4.25rem;font-weight: 600;}</style>', unsafe_allow_html=True)
     # st.markdown('<style>.css-hi6a2p{width: 838px}</style>', unsafe_allow_html=True)
+    
+    ##################
+    # HEADER COLUMNS #
+    ##################
+    
     col1, col2 = st.beta_columns(2)
+    
     col1.header('YOUR BIG 5 PERSONALITY SCORES')
     # st.markdown('''
     #             # YOUR BIG 5 PERSONALITY SCORES
@@ -35,9 +39,12 @@ def app():
                   ### the prediction about your Stress and Loneliness levels is:
                   ###
                   ''')
-
+    ###########
+    # SIDEBAR #
+    ###########
     st.sidebar.title('I see myself as a person who...')
 
+    
     kwargs = {}
 
     bff15_options = ['Strongly disagree', 'Disagree',
@@ -95,7 +102,7 @@ def app():
                                                                 'Isolated', 'Life carries on as usual',
                                                                 'Isolated in medical facility of similar location', '1'])
 
-    # FUNTION FOR PENTAGON BIG 5
+    # FUNTION FOR RADAR CHART BIG 5
 
     def make_radar_chart():
 
@@ -172,7 +179,7 @@ def app():
     col2.write(legend)
 
     # STRESS LEVEL
-    # Here I add the functions for predicting stress...
+    # Here I add the functions for predicting stress
 
     def edu_func(X):
         X['Dem_edu'] = X['Dem_edu'].replace({'Uninformative response': 0, 'None': 1, 'Up to 6 years of school': 2, 'Up to 9 years of school': 3,
