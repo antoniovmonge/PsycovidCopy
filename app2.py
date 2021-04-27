@@ -86,7 +86,6 @@ def app():
     def loneliness():
         fig = plt.figure()
 
-        
         for i in user_select:
             items.append(i)
             # sns.set_style("talk")
@@ -117,11 +116,9 @@ def app():
     if st.button('Apply'):
         # print is visible in server output, not in the page
         print('button clicked!')
-        
         col1, col2, col3 = st.beta_columns((1.5,1,1))
         col1.plotly_chart(country_radar(), use_container_width=True)
         # col1.plotly_chart(country_stats(), use_container_width=True)
-        
         col2.pyplot(stress())
         col2.pyplot(loneliness())
         items = []
