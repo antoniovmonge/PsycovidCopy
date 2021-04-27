@@ -27,12 +27,12 @@ def app():
 
     @st.cache
     def get_cached_data():
-        return pd.read_csv(path).drop(columns='Unnamed: 0')
+        return pd.read_csv(path, index_col=0)
     
     df = get_cached_data()
     # df = pd.read_csv(
     #     'raw_data/cleaned_data_040321.csv').drop(columns='Unnamed: 0')
-
+    
 
     # PLOTLY RADAR CHART
     def country_radar():
@@ -58,7 +58,7 @@ def app():
             polar=dict(
                 radialaxis=dict(
                     visible=True,
-                    range=[0, 5]
+                    range=[0, 6]
                 )),
             showlegend=True
         )
