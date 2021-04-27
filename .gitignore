@@ -6,6 +6,7 @@
 **/__pycache__/
 .env
 notebooks
+/__pycache__
 
 # OS generated files #
 ######################
